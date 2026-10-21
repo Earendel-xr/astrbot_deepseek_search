@@ -1,0 +1,8 @@
+name: astrbot_plugin_deepseek_search
+display_name: DeepSeek 网页搜索
+desc: 使用 DeepSeek Search/Fetch API 搜索网页与读取正文，支持指令和 LLM 工具，无需浏览器。
+version: v0.2.0
+author: 昭璃
+repo: https://github.com/Earendel-xr/astrbot_deepseek_search
+astrbot_version: ">=4.25.1,<5"
+support_platforms: []
