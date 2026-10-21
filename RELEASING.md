@@ -14,7 +14,7 @@ AstrBot 内部插件标识仍为 `astrbot_plugin_deepseek_search`，避免影响
 
 1. 更新 `metadata.yaml` 的 `version` 和 `CHANGELOG.md`。
 2. 运行测试；在支持 AstrBot 的环境中确认集成测试没有被跳过。
-3. 在插件目录执行 `python build.py --expected-version v0.2.0`（版本参数替换为本次版本）。
+3. 在插件目录执行 `python build.py --expected-version v0.2.1`（版本参数替换为本次版本）。
 4. 校验生成的 ZIP 和同名 `.zip.sha256`；创建与元数据版本一致的 Git 标签。
 5. 在 GitHub 创建 Release，上传构建产物。CI 只上传 Actions artifact，不自动发布 Release。
 

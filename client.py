@@ -2,7 +2,6 @@
 import asyncio
 import hashlib
 import json
-import logging
 import time
 from urllib.parse import urlsplit
 
@@ -64,7 +63,7 @@ def fetch_body(url):
 class DeepSeekClient:
     def __init__(self, timeout=20, concurrency=2, cache_seconds=60,
                  max_response_bytes=4_000_000, cache_max_bytes=8 * 1024 * 1024,
-                 diagnostics=True, logger=None):
+                 diagnostics=True, *, logger):
         self.timeout = timeout
         self.slots = asyncio.Semaphore(concurrency)
         self.cache_seconds = cache_seconds
@@ -76,7 +75,7 @@ class DeepSeekClient:
         self.cleanup_task = None
         self.closed = False
         self.diagnostics = diagnostics
-        self.logger = logger or logging.getLogger(__name__)
+        self.logger = logger
 
     async def _cleanup_loop(self):
         while True:

@@ -1,6 +1,6 @@
 import asyncio
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from aiohttp import web
 
@@ -60,7 +60,8 @@ class HTTPTests(unittest.IsolatedAsyncioTestCase):
         # HTTPS URL validation is tested separately; transport tests use loopback HTTP.
         self.normalizer = patch('astrbot_plugin_deepseek_search.client.api_base', return_value=f'http://127.0.0.1:{port}')
         self.normalizer.start()
-        self.client = DeepSeekClient(timeout=2, cache_seconds=60)
+        self.logger = Mock(spec=["info"])
+        self.client = DeepSeekClient(timeout=2, cache_seconds=60, logger=self.logger)
 
     async def asyncTearDown(self):
         await self.client.close()
@@ -167,10 +168,11 @@ class HTTPTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_idle_expiry_and_no_sensitive_diagnostics(self):
         self.client.cache_seconds = 0.02
-        with self.assertLogs('astrbot_plugin_deepseek_search.client', level='INFO') as logs:
-            await self.request(scope='private-user', key='secret-token')
-            await self.request(scope='private-user', key='secret-token')
-        text = '\n'.join(logs.output)
+        await self.request(scope='private-user', key='secret-token')
+        await self.request(scope='private-user', key='secret-token')
+        self.assertEqual(self.logger.info.call_count, 2)
+        text = '\n'.join(call.args[0] for call in self.logger.info.call_args_list)
+        self.assertIn('action=search outcome=network status=200', text)
         self.assertIn('cache_hit', text)
         for secret in ['private-user', 'secret-token', 'example.com']:
             self.assertNotIn(secret, text)

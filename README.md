@@ -277,7 +277,7 @@ GitHub Actions 已配置 Windows / Linux 上 Python 3.11、3.12、3.13 的独立
 python build.py
 ```
 
-ZIP 和同名 `.zip.sha256` 输出到插件父目录下的 `dist/`。文件名从 `metadata.yaml` 读取版本；可使用 `--expected-version v0.2.0` 校验待发布标签，使用 `--output-dir` 修改输出目录。构建脚本使用文件白名单，仅打包运行文件、配置定义、使用与发布文档、许可证，不包含测试、缓存或本地密钥。
+ZIP 和同名 `.zip.sha256` 输出到插件父目录下的 `dist/`。文件名从 `metadata.yaml` 读取版本；可使用 `--expected-version v0.2.1` 校验待发布标签，使用 `--output-dir` 修改输出目录。构建脚本使用文件白名单，仅打包运行文件、配置定义、使用与发布文档、许可证，不包含测试、缓存或本地密钥。
 
 更新记录见 [CHANGELOG.md](CHANGELOG.md)，打标签与升级注意事项见 [RELEASING.md](RELEASING.md)。仓库名为 `astrbot_deepseek_search`，内部插件标识为 `astrbot_plugin_deepseek_search`。
 

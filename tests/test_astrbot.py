@@ -11,6 +11,7 @@ HAS_ASTRBOT = importlib.util.find_spec("astrbot") is not None
 if os.environ.get('REQUIRE_ASTRBOT_TESTS') == '1' and not HAS_ASTRBOT:
     raise RuntimeError('AstrBot integration tests are required but AstrBot is unavailable')
 if HAS_ASTRBOT:
+    from astrbot.api import logger
     from astrbot_plugin_deepseek_search.main import DeepSeekSearchPlugin
     from astrbot_plugin_deepseek_search.output import AttachmentStore
     from astrbot.api.star import Context
@@ -37,7 +38,8 @@ class AstrBotTests(unittest.IsolatedAsyncioTestCase):
     async def asyncTearDown(self):
         await self.plugin.terminate()
 
-    async def test_real_tool_schema(self):
+    async def test_framework_logger_and_real_tool_schema(self):
+        self.assertIs(self.plugin.client.logger, logger)
         tools = {t.name: t for t in llm_tools.func_list}
         for name, arg in [("deepseek_web_search", "query"), ("deepseek_fetch_page", "url")]:
             self.assertEqual(tools[name].parameters['properties'][arg]['type'], 'string')
