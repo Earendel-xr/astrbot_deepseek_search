@@ -1,8 +1,8 @@
-# DeepSeek 网页搜索 · AstrBot
+# 用于AstrBot的DeepSeek网页搜索
 
 为 [AstrBot](https://github.com/AstrBotDevs/AstrBot) 提供网页搜索与正文读取能力，基于 [DeepSeek Search / Fetch API](https://api-docs.deepseek.com/zh-cn/guides/search/)。支持手动指令和大语言模型自动工具调用，无需安装浏览器、嵌入模型或向量数据库。
 
-**当前聊天模型不必是 DeepSeek。** 插件使用 DeepSeek 获取网页资料，再交给当前聊天模型整理回答；也可以通过指令直接查看搜索结果。
+**当前聊天模型不必是 DeepSeek。** 插件使用 DeepSeek 的网页搜索与抓取专用接口而非大模型获取网页资料，再交给当前聊天模型整理回答；也可以通过指令直接查看搜索结果。
 
 [GitHub 仓库](https://github.com/Earendel-xr/astrbot_deepseek_search) · [版本下载](https://github.com/Earendel-xr/astrbot_deepseek_search/releases) · [问题反馈](https://github.com/Earendel-xr/astrbot_deepseek_search/issues)
 
